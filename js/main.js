@@ -66,13 +66,7 @@ $(document).ready(function () {
         // create markers
         for (var i = 0; i < list.length; i++) {
             var marker = createMarker(list[i], i);
-            marker.addListener('click', (function () {
-                // apply marker animation then show infoWindow
-                map.setCenter({lat: marker.getPosition().lat(),lng: marker.getPosition().lng()});
-                map.setZoom(13);
-                toggleBounce(this);
-                getPlaceDetails(this, infoWindow);
-            }));
+            clickLocation(marker, infoWindow);
             self.markers.push(marker);
             bounds.extend(marker.position);
         }
@@ -124,7 +118,7 @@ $(document).ready(function () {
     // toggle bouncing animation
     function toggleBounce(marker) {
 
-        if (marker.getAnimation() != null) {
+        if (marker.getAnimation() !== null) {
             marker.setAnimation(null);
         } else {
             marker.setAnimation(google.maps.Animation.BOUNCE);
@@ -166,6 +160,17 @@ $(document).ready(function () {
     function findMarker(markers, place) {
         return markers.find(function (value) {
             return value.title.toLowerCase() === place.toLowerCase();
+        });
+    }
+
+    // apply marker animation then show infoWindow
+    function clickLocation(marker, infoWindow) {
+        //console.log(marker);
+        marker.addListener("click", function () {
+            map.setCenter({lat: this.getPosition().lat(),lng: this.getPosition().lng()});
+            map.setZoom(13);
+            toggleBounce(this);
+            getPlaceDetails(this, infoWindow);
         });
     }
 
