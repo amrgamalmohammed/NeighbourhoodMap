@@ -1,0 +1,24 @@
+#map-container {
+    height: 100%;
+}
+
+.overlay-top {
+    position: absolute;
+    top: 0;
+}
+
+.overlay-bottom {
+    position: absolute;
+    bottom: 0;
+    right: 0;
+}
+
+.icon {
+    height: 30px;
+}
+
+html, body {
+    height: 100%;
+    margin: 0;
+    padding: 0;
+}
